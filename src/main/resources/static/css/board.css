@@ -1,0 +1,17 @@
+h2 {
+    display: inline-block;
+}
+
+#login_btns {
+    display: inline-block;
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    margin: 10px;
+    list-style: none;
+    text-decoration: none;
+}

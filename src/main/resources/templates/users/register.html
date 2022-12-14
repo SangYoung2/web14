@@ -1,0 +1,69 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}" href="/static/css/register.css">
+    <script th:src="@{/js/register.js}" src="/static/js/register.js" defer></script>
+</head>
+<body>
+    <div id="register_container">
+        <form name="register_form">
+            <h1>회원가입</h1>
+            <p>회원정보를 입력해주세요. 모두 입력하셔야 가입이 가능합니다.</p>
+            <div id="register_box">
+                    <div id="info_box">
+                        <div>
+                            <p>ID를 만들어주세요</p>
+                            <input id="register_id" type="text" placeholder="회원 아이디(ID)는 띄어쓰기 없이 6~10자리의 영문자와 숫자 조합만 가능합니다." name="userID"> <br/>
+                            <span hidden>필수 입력 사항입니다.</span>
+                        </div>
+                        <div>
+                            <p>비밀번호 입력</p>
+                            <input id="register_pw" type="password" placeholder="띄어쓰기 없는 8~15자의 영문 대/소문자,숫자 또는 특수문자 조합으로 입력하셔야 합니다." name="userPW"> <br/>
+                            <span hidden>필수 입력 사항입니다.</span>
+                        </div>
+                        <div>
+                            <p>위의 비밀번호를 다시 입력해주세요</p>
+                            <input id="register_re_pw" type="password" placeholder="필수 정보입니다."> <br/>
+                            <span hidden>필수 입력 사항입니다.</span>
+                        </div>
+                        <div>
+                            <p>이름</p>
+                            <input id="register_name" type="text" placeholder="필수 정보입니다." name="userName"> <br/>
+                            <span hidden>필수 입력 사항입니다.</span>
+                        </div>
+                        <div>
+                            <p>휴대번호입력</p>
+                            <select id="register_select_tel">
+                                <option value="010">010</option>
+                                <option value="011">011</option>
+                                <option value="016">016</option>
+                                <option value="017">017</option>
+                                <option value="018">018</option>
+                            </select>
+                            <input id="register_tel" type="tel" placeholder="전화번호를 정확히 입력해 주세요."><br/>
+                            <span hidden>필수 입력 사항입니다.</span>
+                        </div>
+                        <div>
+                            <p>이메일</p>
+                            <input id="register_email" type="email">
+                            <select id="register_select_email">
+                                <option value="">직접입력</option>
+                                <option value="@naver.com">@naver.com</option>
+                                <option value="@daum.net">@daum.net</option>
+                                <option value="@nate.com">@nate.com</option>
+                            </select> <br/>
+                            <span hidden>필수 입력 사항입니다.</span>
+                        </div>
+                    </div>
+            </div>
+            <input id="register_hidden_tel" type="text" name="userTel" hidden>
+            <input id="register_hidden_email" type="text" name="userEmail" hidden>
+        </form>
+        <div id="register_btns">
+            <a th:href="@{login.html}" href="login.html" id="back_btn"><button>처음으로</button></a>
+            <button id="confirm_btn" onclick="confirm()">확인</button>
+        </div>
+    </div>
+</body>
+</html>

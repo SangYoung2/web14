@@ -1,0 +1,24 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>방 관리 페이지</title>
+    <link rel="stylesheet" href="/static/css/room.css" th:href="@{/css/room.css}">
+    <script src="/js/room.js" th:src="@{/js/room.js}" defer></script>
+</head>
+<body>
+<div id="control_container">
+    <button onclick="get_all_rooms()">방 호출</button>
+    <h2>방 관리 페이지</h2>
+        <div id="new_room_info">
+            호수: <input type="text" name="roomNo">
+            가격: <input type="text" name="roomPrice">
+            최대 인원수: <input type="text" name="roomSize">
+            방 사진: <input type="file">
+        </div>
+        <button type="button" onclick="post_room()">추가하기</button>
+    <h3>전체 방 목록</h3>
+    <div id="room_container">
+    </div>
+</div>
+</body>
+</html>

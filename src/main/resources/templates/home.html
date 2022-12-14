@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="/static/css/home.css" th:href="@{/css/home.css}">
+    <!--  href는 서버가 연결 되지 않았을 때, th:href는 서버가 연결되었을 때 사용  -->
+</head>
+<script>
+    window.onload = () => {
+        document.getElementsByTagName("button").item(0).onclick = () => {
+            document.body.insertAdjacentHTML('afterbegin', '<span>test</span>')
+        }
+    }
+</script>
+<body>
+    홈페이지
+</body>
+</html>

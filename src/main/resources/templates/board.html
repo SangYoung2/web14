@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>현재 예약현황</title>
+</head>
+<link rel="stylesheet" href="/static/css/board.css" th:href="@{/css/board.css}" >
+<script th:inline="javascript">
+    // const auth = [[${#authentication}]];
+    // const errors = [[${errors}]];
+    // console.log(auth);
+    // console.log(errors);
+    function register(){
+        document.location.href = '/users/register';
+    }
+
+    function logout(){
+        document.location.href = '/logout';
+    }
+</script>
+<body>
+<h2>현재 예약 현황판</h2>
+<span sec:authorize="hasRole('ADMIN')">관리자로 로그인하였습니다.</span>
+<div id="login_btns">
+    <ul>
+        <li sec:authorize="not isAuthenticated()"><input type="button" value="로그인"></li>
+        <li sec:authorize="isAuthenticated()"><input type="button" value="로그아웃" onclick="logout()"></li>
+        <li sec:authorize="not isAuthenticated()"><input type="button" value="회원가입" onclick="register()"></li>
+    </ul>
+</div>
+<table border="1">
+    <thead>
+    <tr>
+        <th>예약순번</th>
+        <th>방번호</th>
+        <th>크기</th>
+        <th>가격</th>
+        <th>예약자</th>
+        <th>예약날짜</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dto, status : ${reserveBoardDTO}">
+        <th>[[${status.count}]]</th>
+        <th>[[${dto.reserveVO.reserveRoom}]]</th>
+        <th>[[${dto.roomVO.roomSize}]]</th>
+        <th>[[${dto.roomVO.roomPrice}]]</th>
+        <th>[[${dto.reserveVO.reserveUser}]]</th>
+        <th>[[${dto.reserveVO.reserveDate}]]</th>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/reservation}" href="/reservation">예약하기</a>
+<a th:href="@{/manager/room}" sec:authorize="hasRole('ADMIN')">관리자페이지</a>
+</body>
+</html>

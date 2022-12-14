@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.spring_pj.practice.RoomMapper">
+    <resultMap id="user_with_room" type="com.koreait.spring_pj.practice.Room">
+        <result property="roomNo" column="roomNo" />
+        <collection property="user" javaType="list" ofType="com.koreait.spring_pj.practice.User">
+            <result property="name" column="name"/>
+            <result property="age" column="age"/>
+        </collection>
+    </resultMap>
+
+    <select id="get_room_with_user" resultMap="user_with_room">
+        SELECT * FROM `user`
+        WHERE roomNo = #{no};
+    </select>
+
+<!--    <resultMap id="userRoom" type="com.koreait.spring_pj.practice.Room">-->
+<!--        <id property="roomNo" column="roomNo"/>-->
+<!--        <association property="user">-->
+<!--            <result property="name" column="name" />-->
+<!--            <result property="age" column="age" />-->
+<!--        </association>-->
+<!--    </resultMap>-->
+
+<!--    <select id="get_room_with_user" parameterType="_int" resultMap="userRoom">-->
+<!--        SELECT R.no AS 'roomNo', U.`name` AS 'name', U.`age` AS 'age' FROM room R-->
+<!--        INNER JOIN `user` U-->
+<!--        ON R.userName = U.name-->
+<!--        WHERE `NO` = #{no};-->
+<!--    </select>-->
+</mapper>

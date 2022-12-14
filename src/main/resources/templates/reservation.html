@@ -1,0 +1,31 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>예약페이지</title>
+    <script src="/static/js/reservation.js" th:href="@{/js/reservation.js}" defer></script>
+</head>
+<style>
+    .reserve-room{
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+    }
+</style>
+<body>
+    <h3>현재 남은 방 현황</h3>
+    <div id="reserve-room-container">
+        <div class="reserve-room" th:each="roomVO : ${roomVOS}">
+            <form th:action="|@{/reservation/}${roomVO.roomNo}|" th:method="post">
+                <span>방번호: [[${roomVO.roomNo}]]</span>
+                <img th:src="|@{image/}${roomVO.roomNo}.png|" width="200px" height="200px">
+                <span>인원수(최대):[[${roomVO.roomSize}]]명</span>
+                <span>가격:[[${roomVO.roomPrice}]]원</span>
+                <input type="submit" value="예약하기">
+            </form>
+        </div>
+    </div>
+    <a href="board.html" th:href="@{board.html}"></a>
+</body>
+</html>

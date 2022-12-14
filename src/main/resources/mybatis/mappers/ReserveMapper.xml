@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.spring_pj.mapper.ReserveMapper">
+    <!-- 예약정보와 방 정보를 전부 가지고 있는 DTO객체를 반환하는 resultMap   -->
+    <resultMap id="reservation_with_rooms" type="com.koreait.spring_pj.dto.ReserveBoardDTO">
+        <association property="reserveVO">
+            <result property="reserveUser" column="reserveUser" />
+            <result property="reserveRoom"  column="reserveRoom" />
+            <result property="reserveDate"  column="reserveDate" />
+        </association>
+        <association property="roomVO">
+            <result property="roomSize"  column="roomSize" />
+            <result property="roomPrice"  column="roomPrice" />
+        </association>
+    </resultMap>
+
+    <!--  예약되어있지 않은 방 정보 가져오기  -->
+    <select id="get_empty_rooms" resultType="com.koreait.spring_pj.vos.RoomVO">
+        SELECT ROOM.* FROM `hotel_db`.`room_tbl` ROOM
+        LEFT OUTER JOIN `hotel_db`.`reserve_tbl` RSV
+        ON RSV.`reserveRoom` = ROOM.`roomNo`
+        WHERE RSV.`reserveRoom` IS NULL;
+    </select>
+
+    <!--  예약되어있는 방 정보 가져오기  -->
+    <select id="get_reserved_rooms" resultMap="reservation_with_rooms">
+        SELECT RSV.*, ROOM.`roomSize`, ROOM.`roomPrice`
+        FROM `reserve_tbl` RSV
+        INNER JOIN `room_tbl` ROOM
+        ON ROOM.`roomNo` = RSV.`reserveRoom`;
+    </select>
+
+    <insert id="reserve_room">
+        INSERT INTO `reserve_tbl` (reserveUser, reserveRoom) VALUES
+        (#{userID}, #{roomNo})
+    </insert>
+
+</mapper>
